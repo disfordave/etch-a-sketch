@@ -74,9 +74,11 @@ main {
 .square {
     background-color: #ffffff;
     /* padding: 0.5rem; */
-    cursor: pointer;
+    cursor: crosshair;
     
 }
+
+
 
 
 

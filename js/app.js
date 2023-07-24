@@ -1,8 +1,8 @@
 let canvasSize = 500;
 
-let horizontalLength = 50;
+let horizontalLength = 25;
 
-let selectedColor = "black";
+let selectedColor = "#222222";
 
 const value = document.querySelector("#size-value");
 const input = document.querySelector("#canvas-size-range");
@@ -13,7 +13,9 @@ let eraserMode = false;
 
 let vw  = document.documentElement.clientWidth;
 
+let mouseIsDown = false;
 
+// let mobileMode = false;
 
 function checkWindowSize() {
     vw = document.documentElement.clientWidth;
@@ -43,11 +45,33 @@ function addSquare(many) {
         square.className = 'square';
         square.style.width = `${canvasSize/horizontalLength}px`;
         square.style.height = `${canvasSize/horizontalLength}px`;
-        square.setAttribute("onmousedown", "squareClick(this)");
+        square.onmousedown = function() {onMouseDown(this)};
+        square.onmouseup = function() { onMouseUp(this)};
+        square.onmousemove = function() {squareClick(this)};
         document.getElementById("canvas-area").appendChild(square);
         
         
     }
+}
+
+// function mobileModeToggle() {
+//     mobileMode = !mobileMode;
+//     if (mobileMode) {
+//         document.getElementById("mobile-button").style.backgroundColor = "coral";
+//     } else {
+//         document.getElementById("mobile-button").style.backgroundColor = "white";
+//     }
+//     clearSquares();
+//     addSquare(horizontalLength*horizontalLength);
+// }
+
+function onMouseDown(item) {
+    mouseIsDown = true;
+    squareClick(item);
+}
+
+function onMouseUp(item) {
+    mouseIsDown = false;
 }
 
 function clearSquares() {
@@ -92,11 +116,14 @@ color.addEventListener("input", (event) => {
 function squareClick(item) {
     // this.clear();
     // item.style.backgroundColor = selectedColor;
-    if (!eraserMode) {
-        item.style.backgroundColor = selectedColor;
-    } else {
-        item.style.backgroundColor = "#ffffff";
-    } 
+    if (mouseIsDown/* || mobileMode*/) {
+        if (!eraserMode) {
+            item.style.backgroundColor = selectedColor;
+        } else {
+            item.style.backgroundColor = "#ffffff";
+        } 
+    }
+    
 }
 
 // function clear() {

@@ -19,8 +19,12 @@
             <div id="adjust-menu">
                 <div class="range-area">
                     <p><output id="size-value"></output></p>
-                    <input type="range" id="canvas-size-range" min="1" max="64">
-                    <button id="select-range-button" onclick="selectSize()">Select</button>
+                    <input type="range" id="canvas-size-range" min="1" max="64" value="25">
+                    <div>
+                        <button id="select-range-button" onclick="selectSize()">Select</button>
+                        <!-- <button id="mobile-button" onclick="mobileModeToggle()">Mobile Mode</button> -->
+                    </div>
+                    
                 </div>
                 
                 <div class="pen-and-eraser">
@@ -30,9 +34,10 @@
                     </div>
                     
                     <input type="color" id="color-select" name="color-select"
-                    value="#000000">
+                    value="#222222">
                         <button id="eraser-button" onclick="eraser()">Eraser</button>
                         <button onclick="clearAll()">Clear</button>
+                        
                     
                     
                 </div>
