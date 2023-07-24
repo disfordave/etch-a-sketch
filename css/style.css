@@ -13,6 +13,8 @@ html, body {
     background-color: var(--html-bg);
 }
 
+
+
 h1, p {
     margin: 0;
 }
@@ -60,17 +62,55 @@ main {
     border: var(--canvas-body-border)
 }
 
+
+
+#canvas-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.square {
+    background-color: #ffffff;
+    /* padding: 0.5rem; */
+    cursor: pointer;
+    
+}
+
+
+
 a {
     text-decoration: none;
     color: var(--font-color);
 }
 
-.adjust-menu {
+#adjust-menu {
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    
+}
+
+.range-area {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    align-items:flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
 }
+
+.pen-and-eraser {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 
 button {
     background-color: var(--font-color);
@@ -78,6 +118,7 @@ button {
     border-radius: 1rem;
     padding: 0.25rem 1rem 0.25rem 1rem;
     cursor: pointer;
+    height: 1.5rem;
 }
 
 button:active {

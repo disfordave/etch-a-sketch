@@ -11,17 +11,40 @@
 </head>
 <body>
     <main>
-        <h1>Sketch</h1>
+        <h1>Etch-a-sketch</h1>
         <div class="canvas-bg">
-            <div class="canvas-area">This is canvas</div>
-            <div class="adjust-menu">
-                <input type="range">
-                <button>type</button>
+            <div id="canvas-frame">
+                <div id="canvas-area"></div>
+            </div>
+            <div id="adjust-menu">
+                <div class="range-area">
+                    <p><output id="size-value"></output></p>
+                    <input type="range" id="canvas-size-range" min="1" max="64">
+                    <button id="select-range-button" onclick="selectSize()">Select</button>
+                </div>
+                
+                <div class="pen-and-eraser">
+                    <div>
+                        
+                        <!-- <label for="color-select">Color</label> -->
+                    </div>
+                    
+                    <input type="color" id="color-select" name="color-select"
+                    value="#000000">
+                        <button id="eraser-button" onclick="eraser()">Eraser</button>
+                        <button onclick="clearAll()">Clear</button>
+                    
+                    
+                </div>
+                
+                
+                
             </div>
         </div>
         <footer>
             <p>© 2023 <a class="no-color-link" href="https://reikavik.github.io" target="_blank">Reikavik</a></p>
         </footer>
     </main>
+    <script src="./js/app.js"></script>
 </body>
 </html>
