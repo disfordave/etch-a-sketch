@@ -100,10 +100,10 @@ input.addEventListener("input", (event) => {
   horizontalLength = event.target.value;
 });
 
-function selectSize() {
+document.getElementById("select-range-button").addEventListener("click", function() {
     clearSquares();
     addSquare(horizontalLength*horizontalLength);
-}
+});
 
 
 color.addEventListener("input", (event) => {
@@ -133,16 +133,16 @@ function squareClick(item) {
 //     }
 // }
 
-function eraser() {
+document.getElementById("eraser-button").addEventListener("click", function() {
     eraserMode = !eraserMode;
     if (eraserMode) {
         document.getElementById("eraser-button").style.backgroundColor = "coral";
     } else {
         document.getElementById("eraser-button").style.backgroundColor = "white";
     }
-}
+});
 
-function clearAll() {
+document.getElementById("clear-all-button").addEventListener("click", function(){
     // clearSquares();
     // addSquare(horizontalLength*horizontalLength);
 
@@ -151,7 +151,7 @@ function clearAll() {
         square.style.backgroundColor = "#ffffff";
         square.style.backgroundColor = "#ffffff";
     }
-}
+});
 
 window.addEventListener('resize', checkWindowSize);
 
