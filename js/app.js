@@ -140,12 +140,13 @@ window.addEventListener('resize', checkWindowSize);
 // Check window size initially when the script loads
 checkWindowSize();
 
-function handleTouchEvent(e) {
-    // Prevent scrolling while drawing
-    if (e.cancelable) {
-        e.preventDefault();
-    }
-    // Treat any active touch as a mousedown equivalent
+// Limit touch handling to the canvas so other UI buttons still receive normal events
+const canvasArea = document.getElementById('canvas-area');
+
+function handleCanvasTouchStartMove(e) {
+    // Only act if the touch originated within the canvas area
+    if (!e.target.closest || !e.target.closest('#canvas-area')) return;
+    if (e.cancelable) e.preventDefault(); // prevent scroll while drawing inside canvas
     mouseIsDown = true;
     for (let i = 0; i < e.touches.length; i++) {
         const t = e.touches[i];
@@ -156,12 +157,16 @@ function handleTouchEvent(e) {
     }
 }
 
-document.addEventListener('touchstart', handleTouchEvent, { passive: false });
-document.addEventListener('touchmove', handleTouchEvent, { passive: false });
-document.addEventListener('touchend', function(e) {
-    // When all touches end, stop drawing
+function handleCanvasTouchEnd(e) {
+    // If all touches ended, stop drawing
     if (e.touches.length === 0) {
         mouseIsDown = false;
     }
-}, { passive: false });
+}
+
+if (canvasArea) {
+    canvasArea.addEventListener('touchstart', handleCanvasTouchStartMove, { passive: false });
+    canvasArea.addEventListener('touchmove', handleCanvasTouchStartMove, { passive: false });
+}
+document.addEventListener('touchend', handleCanvasTouchEnd, { passive: true });
 
