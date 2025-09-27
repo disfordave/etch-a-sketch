@@ -54,17 +54,6 @@ function addSquare(many) {
     }
 }
 
-// function mobileModeToggle() {
-//     mobileMode = !mobileMode;
-//     if (mobileMode) {
-//         document.getElementById("mobile-button").style.backgroundColor = "coral";
-//     } else {
-//         document.getElementById("mobile-button").style.backgroundColor = "white";
-//     }
-//     clearSquares();
-//     addSquare(horizontalLength*horizontalLength);
-// }
-
 function onMouseDown(item) {
     mouseIsDown = true;
     squareClick(item);
@@ -126,13 +115,6 @@ function squareClick(item) {
     
 }
 
-// function clear() {
-//     for(var i=0; i < divItems.length; i++) {
-//         var item = divItems[i];
-//         item.style.backgroundColor = 'white';
-//     }
-// }
-
 document.getElementById("eraser-button").addEventListener("click", function() {
     eraserMode = !eraserMode;
     if (eraserMode) {
@@ -158,7 +140,28 @@ window.addEventListener('resize', checkWindowSize);
 // Check window size initially when the script loads
 checkWindowSize();
 
-// var square = document.createElement('div');
-// square.className = 'square';
-// let location = document.getElementById("canvas-area");
-// location.appendChild(square);
+function handleTouchEvent(e) {
+    // Prevent scrolling while drawing
+    if (e.cancelable) {
+        e.preventDefault();
+    }
+    // Treat any active touch as a mousedown equivalent
+    mouseIsDown = true;
+    for (let i = 0; i < e.touches.length; i++) {
+        const t = e.touches[i];
+        const el = document.elementFromPoint(t.clientX, t.clientY);
+        if (el && el.classList && el.classList.contains('square')) {
+            squareClick(el);
+        }
+    }
+}
+
+document.addEventListener('touchstart', handleTouchEvent, { passive: false });
+document.addEventListener('touchmove', handleTouchEvent, { passive: false });
+document.addEventListener('touchend', function(e) {
+    // When all touches end, stop drawing
+    if (e.touches.length === 0) {
+        mouseIsDown = false;
+    }
+}, { passive: false });
+
